@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Tours</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Travel Tours</h1> 
+
+   
+  <div id="tour-list">
+        <h2>Available Tours</h2>
+        <ul id="tour-options"></ul>
+    </div> 
+
+   
+    <div id="add-tour-form">
+        <h2>Add New Tour</h2>
+        <form id="tour-form">
+            <input type="number" id="tour_id" placeholder="Tour ID" required>
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="text" id="description" placeholder="Description" required>
+            <input type="text" id="pick_up" placeholder="Pick-Up Location" required>
+            <input type="text" id="meeting_point" placeholder="Meeting Point" required>
+            <input type="text" id="drop_off" placeholder="Drop-Off Location" required>
+            <input type="number" id="duration" placeholder="Duration" required>
+            <select id="duration_unit" required>
+                <option value="days">Days</option>
+                <option value="hours">Hours</option>
+                <option value="weeks">Weeks</option>
+            </select>
+            <button type="submit">Add Tour</button>
+        </form>
+        
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
