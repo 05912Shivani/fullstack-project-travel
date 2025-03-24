@@ -1,5 +1,5 @@
-const apiUrl = 'https://fullstack-project-travel.onrender.com';
-const addTourUrl = 'https://fullstack-project-travel.onrender.com/tour';
+const apiUrl = 'https://fullstack-project-travel.onrender.com/tour';
+//const addTourUrl = 'https://fullstack-project-travel.onrender.com/tour';
 async function fetchTours() {
     try {
         const response = await fetch(apiUrl);
@@ -48,7 +48,7 @@ async function addTour(event) {
     };
 
     try {
-        const response = await fetch(addTourUrl, {
+        const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
