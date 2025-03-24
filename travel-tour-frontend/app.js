@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/tour';
+const apiUrl = 'https://fullstack-project-travel.onrender.com';
 async function fetchTours() {
     try {
         const response = await fetch(apiUrl);
