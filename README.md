@@ -38,12 +38,12 @@ Swagger Docs available at:
 I have used Swagger UI documentation and you can also test the code on POSTMAN
 
  API Endpoints
- Method    	Endpoint	    Description
- GET	         /tour	      Get all tours
- GET	        /tour/:id	    Get a specific tour
- POST	        /tour        	Create a new tour
- PUT	       /tour/:id	    Update an existing tour
- DELETE	    /tour/:id	      Delete a tour
+ 
+ GET	: /tour	     
+ GET	:  /tour/:id	    
+ POST	: /tour        	
+ PUT	:  /tour/:id	    
+ DELETE	:/tour/:id	     
 
  You can see the full project here:
 
