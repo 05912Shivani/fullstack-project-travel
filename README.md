@@ -46,8 +46,11 @@ I have used Swagger UI documentation and you can also test the code on POSTMAN
  DELETE	    /tour/:id	      Delete a tour
 
  You can see the full project here:
+
  Frontend:https://fullstack-project-travel-1.onrender.com
+ 
  Backend:https://fullstack-project-travel.onrender.com/tour
+ 
  SwaggerUI:https://fullstack-project-travel.onrender.com/api-docs/
 
 
