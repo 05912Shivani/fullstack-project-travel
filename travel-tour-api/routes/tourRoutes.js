@@ -24,6 +24,7 @@ const router = express.Router();
  *       500:
  *         description: Error fetching tours
  */
+// Route to get all tours or a specific tour by ID (optional)
 router.get('/:id?', async (req, res) => {
   try {
     const { id } = req.params;
@@ -36,6 +37,7 @@ router.get('/:id?', async (req, res) => {
           message: `Tour with ID ${id} has been deleted and cannot be found anymore.`
         });
       }
+      // Check if the tour was updated within the last minute
       if (tour.updatedAt && new Date() - new Date(tour.updatedAt) <= 60000) { // 1 minute
         return res.status(200).json({
           success: true,
@@ -49,7 +51,7 @@ router.get('/:id?', async (req, res) => {
         data: { tour_options: [tour] }
       });
     }
-
+ // If no ID is provided, return all tours
     const tours = await Tour.find();
     res.status(200).json({
       success: true,
@@ -116,17 +118,18 @@ router.get('/:id?', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
+// Route to create a new tour
 router.post('/', async (req, res) => {
   try {
     const { tour_id, title, description, pick_up, meeting_point, drop_off, duration, duration_unit } = req.body;
-
+// Ensure all required fields are provided
     if (!tour_id || !title || !description || !pick_up || !meeting_point || !drop_off || !duration || !duration_unit) {
       return res.status(400).json({
         success: false,
         message: 'All fields are required'
       });
     }
-
+ // Check if a tour with the same ID already exists
     const existingTour = await Tour.findOne({ tour_id });
     if (existingTour) {
       return res.status(400).json({
@@ -134,7 +137,7 @@ router.post('/', async (req, res) => {
         message: `Tour with tour_id ${tour_id} already exists`
       });
     }
-
+ // Create a new tour instance
     const newTour = new Tour({
       tour_id,
       title,
@@ -145,7 +148,7 @@ router.post('/', async (req, res) => {
       duration,
       duration_unit
     });
-
+// Save the new tour to the database
     const savedTour = await newTour.save();
     res.status(201).json({
       success: true,
@@ -251,10 +254,11 @@ router.post('/', async (req, res) => {
  *       500:
  *         description: Internal server error
  */
-
+// Route to update an existing tour by ID
 router.put('/:id', async (req, res) => {
   try {
     const { title, description, pick_up, meeting_point, drop_off, duration, duration_unit } = req.body;
+    // Find the tour by ID
     const tour = await Tour.findById(req.params.id);
     if (!tour) {
       return res.status(404).json({
@@ -262,6 +266,7 @@ router.put('/:id', async (req, res) => {
         message: 'Tour not found'
       });
     }
+     // Update the tour fields only if new values are provided
     tour.title = title || tour.title;
     tour.description = description || tour.description;
     tour.pick_up = pick_up || tour.pick_up;
@@ -269,7 +274,7 @@ router.put('/:id', async (req, res) => {
     tour.drop_off = drop_off || tour.drop_off;
     tour.duration = duration || tour.duration;
     tour.duration_unit = duration_unit || tour.duration_unit;
-
+// Save the updated tour details
     await tour.save();
     res.status(200).json({
       success: true,
@@ -310,6 +315,7 @@ router.put('/:id', async (req, res) => {
  */
 router.delete('/:id', async (req, res) => {
   try {
+     // Find and delete the tour
     const deletedTour = await Tour.findByIdAndDelete(req.params.id);
 
     if (!deletedTour) {
@@ -332,5 +338,5 @@ router.delete('/:id', async (req, res) => {
     });
   }
 });
-
+// Export the router so it can be used in the main application
 module.exports = router;
