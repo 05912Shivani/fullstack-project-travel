@@ -10,16 +10,16 @@
 
     <h1>Travel Tours</h1> 
 
-   
+   <!-- Section to display the list of available tours -->
   <div id="tour-list">
         <h2>Available Tours</h2>
-        <ul id="tour-options"></ul>
+        <ul id="tour-options"></ul><!-- Unordered list where tour items will be displayed -->
     </div> 
 
-   
+   <!-- Section for adding a new tour -->
     <div id="add-tour-form">
         <h2>Add New Tour</h2>
-        <form id="tour-form">
+        <form id="tour-form"> <!-- Form for adding new tours -->
             <input type="number" id="tour_id" placeholder="Tour ID" required>
             <input type="text" id="title" placeholder="Title" required>
             <input type="text" id="description" placeholder="Description" required>
@@ -27,16 +27,17 @@
             <input type="text" id="meeting_point" placeholder="Meeting Point" required>
             <input type="text" id="drop_off" placeholder="Drop-Off Location" required>
             <input type="number" id="duration" placeholder="Duration" required>
+            <!-- Dropdown to select the duration unit (days, hours, or weeks) -->
             <select id="duration_unit" required>
                 <option value="days">Days</option>
                 <option value="hours">Hours</option>
                 <option value="weeks">Weeks</option>
             </select>
-            <button type="submit">Add Tour</button>
+            <button type="submit">Add Tour</button> <!-- Button to submit the form -->
         </form>
         
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js"></script> <!-- Linking JavaScript file to handle tour data -->
 </body>
 </html>
