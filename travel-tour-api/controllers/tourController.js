@@ -5,12 +5,13 @@ const Tour = require('../models/tourModel');
 // @access  Public
 const getAllTours = async (req, res) => {
   try {
+    // Fetch all tours from the database
     const tours = await Tour.find();
     
     res.status(200).json({
       success: true,
       data: {
-        tour_options: tours
+        tour_options: tours// Returning the tours as a response
       }
     });
   } catch (error) {
@@ -28,13 +29,16 @@ const getAllTours = async (req, res) => {
 // @access  Public
 const createTour = async (req, res) => {
   try {
+    // Extracting required fields from the request body
     const { tour_id, title, description, pick_up, meeting_point, drop_off, duration, duration_unit } = req.body;
+     // Checking if all required fields are provided
     if (!tour_id || !title || !description || !pick_up || !meeting_point || !drop_off || !duration || !duration_unit) {
       return res.status(400).json({
         success: false,
         message: 'Please provide all required fields'
       });
     }
+      // Creating a new tour instance
     const newTour = new Tour({
       tour_id,
       title,
@@ -45,12 +49,13 @@ const createTour = async (req, res) => {
       duration,
       duration_unit
     });
+    // Saving the new tour to the database
     await newTour.save();
 
     res.status(201).json({
       success: true,
       message: 'Tour Created Successfully',
-      data: newTour
+      data: newTour// Returning the created tour data
     });
   } catch (error) {
     console.error(error);
@@ -67,6 +72,7 @@ const createTour = async (req, res) => {
 // @access  Public
 const updateTour = async (req, res) => {
   try {
+    // Extracting fields from the request body
     const { title, description, pick_up, meeting_point, drop_off, duration, duration_unit } = req.body;
 
     const tour = await Tour.findById(req.params.id);
@@ -76,7 +82,7 @@ const updateTour = async (req, res) => {
         message: 'Tour not found'
       });
     }
-
+  // Updating tour fields if new values are provided, otherwise keep existing values
     tour.title = title || tour.title;
     tour.description = description || tour.description;
     tour.pick_up = pick_up || tour.pick_up;
@@ -84,13 +90,13 @@ const updateTour = async (req, res) => {
     tour.drop_off = drop_off || tour.drop_off;
     tour.duration = duration || tour.duration;
     tour.duration_unit = duration_unit || tour.duration_unit;
-
+  // Saving the updated tour to the database
     await tour.save();
 
     res.status(200).json({
       success: true,
       message: `${tour.title} updated successfully`,
-      data: tour
+      data: tour// Returning updated tour details
     });
   } catch (error) {
     console.error(error);
@@ -119,7 +125,7 @@ const deleteTour = async (req, res) => {
     res.status(200).json({
       success: true,
       message: `${deletedTour.title} deleted successfully`,
-      data: deletedTour
+      data: deletedTour// Returning deleted tour details
     });
   } catch (error) {
     console.error(error);
